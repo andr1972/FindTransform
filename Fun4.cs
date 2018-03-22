@@ -36,10 +36,10 @@ namespace FindTransform
                     i1 = 3;
                     i2 = 2;
                 }
-                double Ax12 = A[i1].x + A[i2].x;
-                double Ay12 = A[i1].y + A[i2].y;
-                return (-B[i1].x + (x[0] * Ax12 + Ay12 * x[1] + 2 * x[2]) / (2 + Ax12 * x[3] + Ay12 * x[4]))
-                / (-B[i1].x + B[i2].x) - (-B[i1].y + (Ax12 * x[5] + Ay12 * x[6] +2 * x[7]) / (2 + Ax12 * x[8] + Ay12 * x[9])) / (-B[i1].y + B[i2].y);              
+                double Cx = (A[i1].x + A[i2].x) / 2.0;
+                double Cy = (A[i1].y + A[i2].y) / 2.0;
+                return (-B[i1].x + (Cx * x[0] + Cy * x[1] + x[2])/ (1 + Cx * x[3] + Cy * x[4]))/ (-B[i1].x + B[i2].x)
+                    - (-B[i1].y + (Cx * x[5] + Cy * x[6] + x[7])/ (1 + Cx* x[8] + Cy * x[9]))/ (-B[i1].y + B[i2].y);
             }
         }
 
@@ -102,38 +102,35 @@ namespace FindTransform
                     i1 = 3;
                     i2 = 2;
                 }
-                double Ax12 = A[i1].x + A[i2].x;
-                double Ay12 = A[i1].y + A[i2].y;
+                double Cx = (A[i1].x + A[i2].x) / 2.0;
+                double Cy = (A[i1].y + A[i2].y) / 2.0;
                 switch (derivative)
                 {
-                    case 0: return Ax12 / ((-B[i1].x + B[i2].x) * (2 + Ax12 * x[3] + Ay12 * x[4]));
-                    case 1: return Ay12 / ((-B[i1].x + B[i2].x) * (2 + Ax12 * x[3] + Ay12 * x[4]));
-                    case 2: return 2 / ((-B[i1].x + B[i2].x) * (2 + Ax12 * x[3] + Ay12 * x[4]));
+                    case 0: return Cx / ((-B[i1].x + B[i2].x)*(1 + Cx * x[3] + Cy * x[4]));
+                    case 1: return Cy / ((-B[i1].x + B[i2].x)*(1 + Cx * x[3] + Cy * x[4]));
+                    case 2: return 1 / ((-B[i1].x + B[i2].x)*(1 + Cx * x[3] + Cy * x[4]));
                     case 3:
                         {
-                            double d = 2 + Ax12 * x[3] + Ay12 * x[4];
-                            return -((Ax12 * (Ax12 * x[0] + Ay12 * x[1] + 2 * x[2])) / ((-B[i1].x + B[i2].x) * (d * d)));
+                            double d = 1 + Cx * x[3] + Cy * x[4];
+                            return -((Cx * (Cx * x[0] + Cy * x[1] + x[2])) / ((-B[i1].x + B[i2].x) * (d*d)));
                         }
                     case 4:
                         {
-                            double d = 2 + Ax12 * x[3] + Ay12 * x[4];
-                            return -((Ay12 * (Ax12 * x[0] + Ay12 * x[1] + 2 * x[2])) / ((-B[i1].x + B[i2].x) * (d * d)));
+                            double d = 1 + Cx * x[3] + Cy * x[4];
+                            return -((Cy * (Cx * x[0] + Cy * x[1] + x[2])) / ((-B[i1].x + B[i2].x) * (d*d)));
                         }
-                    case 5:
-                        return -(Ax12 / ((-B[i1].y + B[i2].y) * (2 + Ax12 * x[8] + Ay12 * x[9])));
-                    case 6:
-                        return -(Ay12 / ((-B[i1].y + B[i2].y) * (2 + Ax12 * x[8] + Ay12 * x[9])));
-                    case 7:
-                        return -(2 / ((-B[i1].y + B[i2].y) * (2 + Ax12 * x[8] + Ay12 * x[9])));
+                    case 5: return -(Cx / ((-B[i1].y + B[i2].y)*(1 + Cx * x[8] + Cy * x[9])));
+                    case 6: return -(Cy / ((-B[i1].y + B[i2].y)*(1 + Cx * x[8] + Cy * x[9])));
+                    case 7: return -(1 / ((-B[i1].y + B[i2].y)*(1 + Cx * x[8] + Cy * x[9])));
                     case 8:
                         {
-                            double d = 2 + Ax12 * x[8] + Ay12 * x[9];
-                            return (Ax12 * (Ax12 * x[5] + Ay12 * x[6] + 2 * x[7])) / ((-B[i1].y + B[i2].y) * (d * d));
+                            double d = 1 + Cx * x[8] + Cy * x[9];
+                            return (Cx*(Cx * x[5] + Cy * x[6] + x[7])) / ((-B[i1].y + B[i2].y) * (d*d));
                         }
                     case 9:
                         {
-                            double d = 2 + Ax12 * x[8] + Ay12 * x[9];
-                            return (Ay12 * (Ax12 * x[5] + Ay12 * x[6] + 2 * x[7])) / ((-B[i1].y + B[i2].y) * (d * d));
+                            double d = 1 + Cx * x[8] + Cy * x[9];
+                            return (Cy * (Cx * x[5] + Cy * x[6] + x[7])) / ((-B[i1].y + B[i2].y) * (d*d));
                         }
                     default: return 0;
                 }
