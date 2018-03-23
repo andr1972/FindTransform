@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fun4simple.cs" />
     <Compile Include="Fun5.cs" />
     <Compile Include="Fun4.cs" />
+    <Compile Include="Fun5square.cs" />
     <Compile Include="Gauss.cs" />
     <Compile Include="Newton.cs" />
     <Compile Include="PointD.cs" />
