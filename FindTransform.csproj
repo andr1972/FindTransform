@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,11 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapWriter.cs" />
     <Compile Include="Fun4simple.cs" />
     <Compile Include="Fun5.cs" />
     <Compile Include="Fun4.cs" />
     <Compile Include="Fun5square.cs" />
     <Compile Include="Gauss.cs" />
+    <Compile Include="MatColor.cs" />
     <Compile Include="Newton.cs" />
     <Compile Include="PointD.cs" />
     <Compile Include="Program.cs" />

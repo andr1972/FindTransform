@@ -2,7 +2,7 @@
 
 namespace FindTransform
 {
-    class PointD
+    struct PointD
     {
         public double x;
         public double y;
@@ -15,7 +15,8 @@ namespace FindTransform
             PointD[] P = new PointD[n];
             for (int i = 0; i < n; i++)
             {
-                P[i] = new PointD(init[2 * i], init[2 * i + 1]);
+                P[i].x = init[2 * i];
+                P[i].y = init[2 * i + 1];
             }
             return P;
         }

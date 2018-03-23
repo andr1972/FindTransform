@@ -16,7 +16,6 @@ namespace FindTransform
             Vector X = start.Clone();
             Vector F = new Vector(size);
             Matrix J = new Matrix(size, size);
-            Vector D;
             do
             {
                 for (int i = 0; i < size; i++)

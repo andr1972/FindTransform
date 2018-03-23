@@ -68,7 +68,8 @@ namespace FindTransform
 
         static void Main(string[] args)
         {
-            testFun5square();
+            //testFun5square();
+            BitmapWriter.Do();
         }
     }
 }
