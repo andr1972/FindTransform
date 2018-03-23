@@ -51,7 +51,7 @@ namespace FindTransform
                 X.print();
         }
 
-        static void testFun5square()
+        static Vector testFun5square()
         {
             PointD[] B = PointD.fromDouble(new double[] { 162, 153, 742, 141, 84, 628, 807, 615, 453,114 });
             PointD[] A = PointD.fromDouble(new double[] { 200, 300, 200 + 180 * 3, 300, 200, 300 + 219 * 3 ,
@@ -64,12 +64,13 @@ namespace FindTransform
                 Console.WriteLine("bad");
             else
                 X.print();
+            return X;
         }
 
         static void Main(string[] args)
         {
-            //testFun5square();
-            BitmapWriter.Do();
+            Vector X = testFun5square();
+            BitmapWriter.Do(X);
         }
     }
 }

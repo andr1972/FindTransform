@@ -8,17 +8,17 @@ namespace FindTransform
 {
     class BitmapWriter
     {
-        private static void Transformation(MatColor im, MatColor output)
+        private static void Transformation(MatColor im, MatColor output, Vector X)
         {
             for (int y = 0; y < output.h; ++y)
                 for (int x = 0; x < output.w; ++x)
                 {
                     PointD p1;
-                    p1.x = (0.995908734520867 * x - 0.132430377748651 * y - 10.560320141038) /
-                        (1 + 1.17786537813519E-05 * x - 0.000277557920657936 * y);
-                    p1.y = (-0.414732683122513 * x + 0.487661277134173 * y + 59.8242757768033 +
-                        0.000417226091721666 * x * x + 1.25892047681815E-05 * x * y) /
-                        (1 + 1.17786537813519E-05 * x - 0.000277557920657936 * y);
+                    p1.x = (X[0] * x + X[1]* y + X[2]) /
+                        (1 + X[3]* x + X[4] * y);
+                    p1.y = (X[5] * x + X[6] * y + X[7] +
+                        X[8] * x * x + X[9] * x * y) /
+                        (1 + X[3] * x + X[4] * y);
 
                     byte valR, valG, valB;
                     im.ugetbilinear(p1.x, p1.y, out valR, out valG, out valB);
@@ -52,7 +52,7 @@ namespace FindTransform
             return null;
         }
 
-        public static void Do()
+        public static void Do(Vector X)
         {
             string path = @"..\..\perspective.jpg";
             Bitmap bmp0 = LoadBitmap(path);
@@ -67,7 +67,7 @@ namespace FindTransform
             Marshal.Copy(ptr, im.bytes, 0, numBytes);
             bmp0.UnlockBits(data);
             MatColor output = new MatColor(bmp1.Width, bmp1.Height);
-            Transformation(im, output);
+            Transformation(im, output, X);
             rect = new Rectangle(0, 0, bmp1.Width, bmp1.Height);
             data = bmp1.LockBits(rect, ImageLockMode.ReadWrite, bmp1.PixelFormat);
             ptr = data.Scan0;
