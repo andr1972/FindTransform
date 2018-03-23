@@ -10,7 +10,7 @@ namespace FindTransform
     }
 
     class Newton
-    {                
+    {
         internal Vector Do(int size, IFun fun, Vector start)
         {
             Vector X = start.Clone();
@@ -29,6 +29,6 @@ namespace FindTransform
                 //need weight vector because different coordinates can diffs by order of magnitudes
             } while (F.norm(fun.weights()) > 1e-12);
             return X;
-        }       
+        }
     }
 }

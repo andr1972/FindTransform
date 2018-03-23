@@ -75,7 +75,7 @@ namespace FindTransform
         {
             this.rows = rows;
             this.cols = cols;
-            b = new double[rows * cols];            
+            b = new double[rows * cols];
         }
 
         internal Matrix(int size)
@@ -99,8 +99,8 @@ namespace FindTransform
         {
             get { return b[row * cols + col]; }
             set { b[row * cols + col] = value; }
-        }        
-        
+        }
+
         public static Vector operator*(Matrix lhs, Vector rhs)
         {
             if (lhs.cols != rhs.rows) throw new Exception("I can't multiply matrix by vector");
@@ -156,7 +156,7 @@ namespace FindTransform
                     this[diag, col] *= invd;
                 }
                 for (int col = 0; col < cols; col++)
-                { 
+                {
                     M[diag, col] *= invd;
                 }
                 for (int row = 0; row < rows; row++)
@@ -169,7 +169,7 @@ namespace FindTransform
                             this[row, col] -= d * this[diag, col];
                         }
                         for (int col = 0; col < this.cols; col++)
-                        { 
+                        {
                             M[row, col] -= d * M[diag, col];
                         }
                     }

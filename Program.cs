@@ -36,10 +36,39 @@ namespace FindTransform
                 X.print();
         }
 
+        static void testFun4simple()
+        {
+            PointD[] B = PointD.fromDouble(new double[] { 162, 153, 742, 141, 84, 628, 807, 615});
+            PointD[] A = PointD.fromDouble(new double[] { 200, 300, 200 + 180 * 3, 300, 200, 300 + 219 * 3 ,
+                200 + 180 * 3, 300 + 219 * 3 });
+            Fun4simple fun = new Fun4simple(A, B);
+            Newton newton = new Newton();
+            Vector start = new Vector(new double[] { 1, 0, 0, 0, 0, 0, 1, 0 });
+            Vector X = newton.Do(8, fun, start);
+            if (X == null)
+                Console.WriteLine("bad");
+            else
+                X.print();
+        }
+
+        static void testFun5square()
+        {
+            PointD[] B = PointD.fromDouble(new double[] { 162, 153, 742, 141, 84, 628, 807, 615, 453,114 });
+            PointD[] A = PointD.fromDouble(new double[] { 200, 300, 200 + 180 * 3, 300, 200, 300 + 219 * 3 ,
+                200 + 180 * 3, 300 + 219 * 3, 200 + 90 * 3, 300 });
+            Fun5square fun = new Fun5square(A, B);
+            Newton newton = new Newton();
+            Vector start = new Vector(new double[] { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 });
+            Vector X = newton.Do(10, fun, start);
+            if (X == null)
+                Console.WriteLine("bad");
+            else
+                X.print();
+        }
+
         static void Main(string[] args)
         {
-            testFun5();
-            testFun4();
+            testFun5square();
         }
     }
 }
