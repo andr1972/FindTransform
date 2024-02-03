@@ -54,7 +54,7 @@ namespace FindTransform
 
         public static void Do(Vector X)
         {
-            string path = @"..\..\perspective.jpg";
+            string path = "../../perspective.jpg";
             Bitmap bmp0 = LoadBitmap(path);
             Bitmap bmp1 = new Bitmap(bmp0.Width, (int)(bmp0.Height * 1.5));
             Rectangle rect = new Rectangle(0, 0, bmp0.Width, bmp0.Height);
@@ -83,7 +83,7 @@ namespace FindTransform
             myEncoderParameters = new EncoderParameters(1);
             myEncoderParameter = new EncoderParameter(myEncoder, 87L);
             myEncoderParameters.Param[0] = myEncoderParameter;
-            bmp1.Save(@"..\..\output.jpg", myImageCodecInfo, myEncoderParameters);
+            bmp1.Save("../../output.jpg", myImageCodecInfo, myEncoderParameters);
         }
     }
 }
